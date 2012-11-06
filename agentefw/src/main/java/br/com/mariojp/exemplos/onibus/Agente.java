@@ -44,7 +44,7 @@ public class Agente {
 		 * mapViewer.setZoom(3);
 		 */
 		JXMapViewer mapViewer = new JXMapViewer();
-		
+		   
 		// Setup local file cache
 		File cacheDir = new File(System.getProperty("user.home") + File.separator + ".jxmapviewer2");
 		LocalResponseCache.installResponseCache(cacheDir, false);
@@ -174,15 +174,15 @@ public class Agente {
 		}
 		/*
 		 * Hora inicio: 10:18:29 Hora Fim : 10:18:29 Tempo : 97milisegundos
-		 * Total de Nós Expandidos : 63 Total de Nós Visitados : 44
+		 * Total de N��s Expandidos : 63 Total de N��s Visitados : 44
 		 * 
 		 * Proximo Ponto 1.675783872623694 5 Linha: N3 Ponto: HAA40520 SS
 		 * 
-		 * BFS Total de Nós Expandidos : 170 Total de Nós Visitados : 46
+		 * BFS Total de N��s Expandidos : 170 Total de N��s Visitados : 46
 		 * 
-		 * Dik Total de Nós Expandidos : 68 Total de Nós Visitados : 49
+		 * Dik Total de N��s Expandidos : 68 Total de N��s Visitados : 49
 		 * 
-		 * A* Total de Nós Expandidos : 56 Total de Nós Visitados : 36
+		 * A* Total de N��s Expandidos : 56 Total de N��s Visitados : 36
 		 */
 
 		agent.setFunctions(new Funcoes());
