@@ -2,9 +2,9 @@ package br.com.mariojp.ai.agent.view;
 
 public class TreeNode {
 	
-	private int numero;
+	private int number;
 	
-	int pai;
+	int parent;
 	
 	private String label;
 
@@ -12,16 +12,16 @@ public class TreeNode {
 
 
 	/**
-	 * @param numero
-	 * @param pai
+	 * @param number
+	 * @param parent
 	 * @param label
 	 * @param solution
 	 */
-	public TreeNode(int numero, int pai, String label, boolean solution) {
+	public TreeNode(int number, int parent, String label, boolean solution) {
 		// TODO Auto-generated constructor stub
-		this.numero = numero;
+		this.number = number;
 		this.label = label;
-		this.pai = pai;
+		this.parent = parent;
 		this.solution = solution;
 	}
 
@@ -48,21 +48,24 @@ public class TreeNode {
 		this.label = label;
 	}
 
-	public int getNumero() {
-		return numero;
+	
+	public int getNumber() {
+		return number;
 	}
 
-	public void setNumero(int numero) {
-		this.numero = numero;
+	
+	public void setNumber(int number) {
+		this.number = number;
 	}
 
-	public int getPai() {
-		return pai;
+	
+	public int getParent() {
+		return parent;
 	}
 
-	public void setPai(int pai) {
-		this.pai = pai;
+	
+	public void setParent(int parent) {
+		this.parent = parent;
 	}
-
 	
 }

@@ -5,9 +5,9 @@ import java.util.List;
 
 
 /**
- * <p>Title: Agentes Inteligentes</p>
+ * <p>Title: Intelligent Agnts</p>
  *
- * <p>Description: Classe EstadoGenerico </p>
+ * <p>Description: Functions Class </p>
  *
  * <p>Copyright: Copyright mariojp(c) 2006</p>
  *
@@ -19,7 +19,7 @@ public class Functions implements IFunctions {
 	
 	private List<IState> objectives = new ArrayList<IState>();	
 	/**
-	 * função g(x) representa o calculo do custo do nó.
+	 * g(x) represents the node's cost
 	 * 
 	 * @param o
 	 * @return
@@ -29,21 +29,21 @@ public class Functions implements IFunctions {
 	}
 
 	/**
-	 * função h(x) representa o calculo da heuristica do nó.
+	 * h(x) represents heuristic's calculation of node.
 	 * 
 	 * @param o
 	 * @return
 	 */
-	public double h(INode no){
+	public double h(INode node){
 		return 0;
 	}
 	
 	
-	public double calculaUtilidade(INode no) {
+	public double calculateUtility(INode node) {
 		return 0;
 	}
 
-	public boolean funcaoObjetivo(IState no) {
+	public boolean objectiveFunction(IState node) {
 		return false;
 	}
 

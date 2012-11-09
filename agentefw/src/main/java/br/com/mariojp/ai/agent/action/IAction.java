@@ -6,9 +6,9 @@ import br.com.mariojp.ai.agent.IState;
 import br.com.mariojp.ai.agent.exception.ImpossibleActionException;
 
 /**
- * Interface de uma ação a ser executada.
+ * Interface of an action to be performed.
  * 
- * As ações devem implementar esta interface. 
+ * Actions should implement this interface.
  * 
  * @author Mario Jorge Pereira
  *
@@ -16,14 +16,14 @@ import br.com.mariojp.ai.agent.exception.ImpossibleActionException;
 public interface IAction {
 
 	/**
-	 * Metodo que deve ser implementado retonando o estado apos a ação aplicada.
-	 * @param estado
-	 * @return List - Retorna uma lista contendo de 1 a N Estados possiveis depois da ação aplicada.
+	 * Method to be implemented returning the state after the action applied.
+	 * @param state
+	 * @return List - A list containing from 1 to N possible states after the action applied.
 	 * @throws ImpossibleActionException
 	 */
-	public List<IState> execute(IState estado) throws ImpossibleActionException;
+	public List<IState> execute(IState state) throws ImpossibleActionException;
 	
 	
-	public List<IState> revert(IState estado) throws ImpossibleActionException;
+	public List<IState> revert(IState state) throws ImpossibleActionException;
 
 }

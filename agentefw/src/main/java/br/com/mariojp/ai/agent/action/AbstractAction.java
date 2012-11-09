@@ -7,12 +7,12 @@ import br.com.mariojp.ai.agent.exception.ImpossibleActionException;
 
 public abstract class AbstractAction implements IAction {
 
-	public List<IState> execute(IState estado) throws ImpossibleActionException {
+	public List<IState> execute(IState state) throws ImpossibleActionException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<IState> revert(IState estado) throws ImpossibleActionException {
+	public List<IState> revert(IState state) throws ImpossibleActionException {
 		// TODO Auto-generated method stub
 		return null;
 	}

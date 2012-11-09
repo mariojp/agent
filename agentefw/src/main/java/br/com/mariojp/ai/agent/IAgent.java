@@ -30,11 +30,10 @@ public interface IAgent {
 
 	public abstract INode function() throws EmptyBorderException;
 	
-	public abstract List<INode> obterCaminho(INode no);
+	public abstract List<INode> getPath(INode no);
 	
 	public abstract INode getFirstNode();
 	
-
-	public abstract void exibirGrafico(List<INode> cam, String nome);
+	public abstract void showGraphic(List<INode> cam, String nome);
 	
 }

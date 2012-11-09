@@ -14,23 +14,22 @@ public class StarSearch extends Agent implements Comparator<INode>{
 
 	public StarSearch(AgentModel agent) {
 		super(agent);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public INode function() throws EmptyBorderException {
 		this.border.add(this.firstNode);
-		INode no = null;
-		boolean concluido = false;
-		while (!concluido) {
+		INode iNode = null;
+		boolean completed = false;
+		while (!completed) {
 			if (this.border.isEmpty()) {
 				throw new EmptyBorderException();
 			} else {
-				no = (INode) this.border.remove(0);
-				if (this.isObjetivo(no)) {
-					concluido = true;
+				iNode = (INode) this.border.remove(0);
+				if (this.isGoal(iNode)) {
+					completed = true;
 				} else {
-					List<INode> list = this.actionCommand.executeActions(no);
+					List<INode> list = this.actionCommand.executeActions(iNode);
 					for(INode node : list){
 						if(!border.containsState(node)){
 							border.add(node);
@@ -42,7 +41,7 @@ public class StarSearch extends Agent implements Comparator<INode>{
 
 		}
 		this.end = new Date();
-		return no;
+		return iNode;
 	}
 
 	public int compare(INode node1, INode node2) {
@@ -55,7 +54,7 @@ public class StarSearch extends Agent implements Comparator<INode>{
 	}
 	
 	public double f(INode node){
-		return node.getCost()+node.getHeuristica();
+		return node.getCost()+node.getHeuristic();
 	}
 
 }

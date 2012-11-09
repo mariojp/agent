@@ -27,13 +27,13 @@ public class AgenteVelha {
 
 		int vez = inicial.getAdversario();
 		INode nofinalA = null;
-		while (!funcoes.funcaoObjetivo(a.getInitState())) {
+		while (!funcoes.objectiveFunction(a.getInitState())) {
 			System.out.println(a.getInitState());
 			if (inicial.getAdversario() == vez) {
 				vez = inicial.getJogador();
 				boolean ok = false;
 				while (!ok) {
-					// vez do usuário jogar
+					// vez do usuï¿½rio jogar
 					try {
 						System.out.println("\nqual sua jogada?");
 						System.out.print("linha (1, 2 ou 3):");
@@ -45,11 +45,11 @@ public class AgenteVelha {
 							a.setInitState(inicial);
 							ok = true;
 						} else {
-							System.out.println("Posição já ocupada.");
+							System.out.println("Posiï¿½ï¿½o jï¿½ ocupada.");
 						}
 
 					} catch (Exception e) {
-						System.out.println("Digite números entre 1 e 3");
+						System.out.println("Digite nï¿½meros entre 1 e 3");
 					}
 				}
 			} else {

@@ -31,7 +31,7 @@ public class AgenteMetroParis {
 		AgentModel agent= new AgentModel();
 		
 		/**
-		 * Inicia as ações e adiciona a lista de ações. 
+		 * Inicia as aï¿½ï¿½es e adiciona a lista de aï¿½ï¿½es. 
 		 */
 		agent.addAction("Baldear",new Baldear());
 		agent.addAction("Ir de uma estacao a outra",new IrEstacaoOutraEstracao());
@@ -68,7 +68,7 @@ public class AgenteMetroParis {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List cam = agente.obterCaminho(nofinal);
+		List cam = agente.getPath(nofinal);
 		//agente.exibirGrafico(null);
 		System.out.println(cam);
 		System.out.println(agente);
