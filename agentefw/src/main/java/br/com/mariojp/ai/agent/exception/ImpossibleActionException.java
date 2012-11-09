@@ -7,7 +7,7 @@ package br.com.mariojp.ai.agent.exception;
  * @file AcaoImpossivelException.java
  * @author Mario Jorge Pereira
  * @version 1.1
- * <p>Classe que representa o erro de Ação Impossivel</p>
+ * <p>Class representing the Impossible Action Error</p>
  *
  */
 public class ImpossibleActionException extends Exception {
@@ -15,10 +15,10 @@ public class ImpossibleActionException extends Exception {
 	private static final long serialVersionUID = 1L;
 
 	public ImpossibleActionException() {
-        super("Acao nao pode ser executada!");
+        super("Action can not be executed!");
     }
 	
-	public ImpossibleActionException(String nomeacao) {
-        super("Acao nao pode ser executada "+nomeacao+"!");
+	public ImpossibleActionException(String actionName) {
+        super("Action can not be executed "+actionName+"!");
     }
 }

@@ -6,7 +6,7 @@ import br.com.mariojp.ai.agent.IState;
 
 public class Funcoes extends Functions {
 
-	public double calculaUtilidade(INode node) {
+	public double calculateUtility(INode node) {
 		Estado estado = (Estado) node.getState();
 		int val = 0;
 		if (ganha(estado.getJogo(), estado.getJogador())) {
@@ -18,7 +18,7 @@ public class Funcoes extends Functions {
 
 	}
 
-	public boolean funcaoObjetivo(IState estado) {
+	public boolean objectiveFunction(IState estado) {
 		return (ganha(((Estado) estado).getJogo(), ((Estado) estado)
 				.getJogador())
 				|| ganha(((Estado) estado).getJogo(), ((Estado) estado)

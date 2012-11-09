@@ -2,9 +2,9 @@ package br.com.mariojp.ai.agent;
 
 
 /**
- * <p>Title: Agentes Inteligentes</p>
+ * <p>Title: Intelligent Agents</p>
  *
- * <p>Description: Classe EstadoGenerico </p>
+ * <p>Description: Class GenericState </p>
  *
  * <p>Copyright: Copyright mariojp(c) 2006</p>
  *

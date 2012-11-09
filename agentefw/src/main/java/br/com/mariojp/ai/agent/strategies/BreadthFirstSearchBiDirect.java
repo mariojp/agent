@@ -22,47 +22,47 @@ public class BreadthFirstSearchBiDirect extends Agent  {
 	public INode function() throws EmptyBorderException {
 		this.border.add(this.firstNode);
 		this.border2.add(this.getGoalNode());
-		INode no = null;
-		INode no2 = null;
-		INode temp = null;
-		boolean concluido = false;
-		while (!concluido) {
+		INode node = null;
+		INode node2 = null;
+		INode nodeTemp = null;
+		boolean completed = false;
+		while (!completed) {
 			if (this.border.isEmpty()) {
 				throw new EmptyBorderException();
 			} else {
-				temp = estadoIgual(this.border.getList(),this.border2.getList());
-				if (temp!=null) {
-					concluido = true;
+				nodeTemp = equalState(this.border.getList(),this.border2.getList());
+				if (nodeTemp!=null) {
+					completed = true;
 				} else {
-					no = (INode) this.border.remove(0);
-					no2 = this.border2.remove(0);
-					List<INode> list = this.actionCommand.executeActions(no);
+					node = (INode) this.border.remove(0);
+					node2 = this.border2.remove(0);
+					List<INode> list = this.actionCommand.executeActions(node);
 					border.addAll(list);
-					List<INode> list2 = this.actionCommand.revertActions(no2);
+					List<INode> list2 = this.actionCommand.revertActions(node2);
 					border2.addAll(list2);
 				}
 			}
 
 		}
-		INode temp2 = this.noIgual(this.border2.getList(),temp);
-		List<INode> lista = new ArrayList<INode>();
+		INode nodeTemp2 = this.equalNode(this.border2.getList(),nodeTemp);
+		List<INode> list = new ArrayList<INode>();
 		do{
-			temp2 = temp2.getPai();
-			lista.add(temp2);
-		}while(temp2.getPai()!=null);
+			nodeTemp2 = nodeTemp2.getParent();
+			list.add(nodeTemp2);
+		}while(nodeTemp2.getParent()!=null);
 		
-		for(int i = 0; i <lista.size();i++){
-			temp2 = lista.get(i);
-			temp2.setPai(temp);
-			temp2.setDepth(temp.getDepth()+1);
-			temp = temp2;
+		for(int i = 0; i <list.size();i++){
+			nodeTemp2 = list.get(i);
+			nodeTemp2.setParent(nodeTemp);
+			nodeTemp2.setDepth(nodeTemp.getDepth()+1);
+			nodeTemp = nodeTemp2;
 			
 		}
 		this.end = new Date();
-		return no;
+		return node;
 	}
 	
-	private INode noIgual(List<INode> l,INode n){
+	private INode equalNode(List<INode> l,INode n){
 		for(int j = 0;j < l.size();j++){
 			INode node =l.get(j);
 			if(node.getState().equals(n.getState())){
@@ -72,7 +72,7 @@ public class BreadthFirstSearchBiDirect extends Agent  {
 		return null;
 	}
 	
-	private INode estadoIgual(List<INode> l1,List<INode> l2){
+	private INode equalState(List<INode> l1,List<INode> l2){
 		for(int i = 0;i<l1.size();i++){
 			INode node1 =  l1.get(i);
 			for(int j = 0;j < l2.size();j++){

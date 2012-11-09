@@ -20,14 +20,14 @@ public class Funcoes extends Functions {
 	public double g(INode arg0) {
 //		Obtendo o no
 		INode ino = (INode) arg0;
-		//Função Heuristica
+		//Funï¿½ï¿½o Heuristica
 		
 //		Obtendo o estado
 		Estado estado = (Estado)ino.getState();		
 		//Obtendo o estado pai
 		Estado estadoPai = null;
-		if (ino.getPai()!=null)
-			estadoPai = (Estado)ino.getPai().getState();
+		if (ino.getParent()!=null)
+			estadoPai = (Estado)ino.getParent().getState();
 		
 		double distancia = 0;		
 		double tempo = 0;
@@ -55,7 +55,7 @@ public class Funcoes extends Functions {
 		//Obtendo o estado
 		Estado e = (Estado)ino.getState();		
 
-		// pega um objetivo pq eh uma unica estcação, só diferenciando a linha 
+		// pega um objetivo pq eh uma unica estcaï¿½ï¿½o, sï¿½ diferenciando a linha 
 		Estado estadoObjetivo = (Estado) this.getObjectives().get(0);
 		
 		
@@ -63,12 +63,12 @@ public class Funcoes extends Functions {
 		double distancia = 0;		
 		@SuppressWarnings("unused") double tempo = 0;
 		try {
-			//Função Heuristica
+			//Funï¿½ï¿½o Heuristica
 			distancia = CentralControle.getInstancia().getDistanciaDireta(e.getEstacao(),estadoObjetivo.getEstacao());
 			f = calcularTempoMinutos(distancia);
 			
 		} catch (DistanciaNaoInformadaException e1) {
-			f = 0;// pq estou baldeando da origem para origem só mudando a linha
+			f = 0;// pq estou baldeando da origem para origem sï¿½ mudando a linha
 		}
 		//System.out.println("heuristica"+f+"\n"+e.getEstacao()+"\n"+estadoObjetivo.getEstacao());
 		return f;

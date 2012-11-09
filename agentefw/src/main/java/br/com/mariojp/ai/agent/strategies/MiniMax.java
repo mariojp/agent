@@ -16,62 +16,60 @@ public class MiniMax extends Agent {
 
 	@Override
 	public INode function() throws EmptyBorderException {
-		INode no = (INode) this.firstNode;
-		max(no);
+		INode node = (INode) this.firstNode;
+		max(node);
 		this.end = new Date();
-		return no.getNext();
+		return node.getNext();
 	}
 
 	/**
 	 * 
-	 * MiniMax, retorna a utilidade máxima de um estado
+	 * MiniMax, returns the maximum utility of a state
 	 * 
 	 */
-	public double max(INode noCorrente) {
-		if (this.isObjetivo(noCorrente)) {
-			return functions.calculaUtilidade(noCorrente);
+	public double max(INode currentNode) {
+		if (this.isGoal(currentNode)) {
+			return functions.calculateUtility(currentNode);
 		}
-		double maximo = Integer.MIN_VALUE;
-		Iterator i = this.actionCommand.executeActions(noCorrente).iterator();
+		double max = Integer.MIN_VALUE;
+		Iterator i = this.actionCommand.executeActions(currentNode).iterator();
 		while (i.hasNext()) {
-			INode sucessor = (INode) i.next();
-			double minSucessor = min(sucessor);
-			  if (minSucessor > maximo){ 
-				  maximo = minSucessor;
-				  noCorrente.setUtility( maximo );
-				  noCorrente.setNext(sucessor);
+			INode successor = (INode) i.next();
+			double minSuccessor = min(successor);
+			  if (minSuccessor > max){ 
+				  max = minSuccessor;
+				  currentNode.setUtility( max );
+				  currentNode.setNext(successor);
 			 }
 			 
 		}
-		return maximo;
+		return max;
 	}
 
 	/**
 	 * 
-	 * MiniMax, retorna a utilidade mínima de um estado
+	 * MiniMax, returns the minimum utility of a state
 	 * 
 	 */
-	public double min(INode noCorrente) {
+	public double min(INode currentNode) {
 
-		if (this.isObjetivo(noCorrente)) {
-			return functions.calculaUtilidade(noCorrente);
+		if (this.isGoal(currentNode)) {
+			return functions.calculateUtility(currentNode);
 		}
 
-		double minimo = Integer.MAX_VALUE;
-		Iterator i = this.actionCommand.executeActions(noCorrente).iterator();
+		double min = Integer.MAX_VALUE;
+		Iterator i = this.actionCommand.executeActions(currentNode).iterator();
 		while (i.hasNext()) {
-			INode sucessor = (INode) i.next();
-			double maxSucessor = max(sucessor);
-			if (maxSucessor < minimo){  
-			  minimo = maxSucessor;
-			  noCorrente.setUtility( minimo ); 
-			  noCorrente.setNext(sucessor); 
+			INode successor = (INode) i.next();
+			double maxSuccessor = max(successor);
+			if (maxSuccessor < min){  
+			  min = maxSuccessor;
+			  currentNode.setUtility( min ); 
+			  currentNode.setNext(successor); 
 			}
 			 
 		}
-		return minimo;
+		return min;
 	}
-	
-	
 
 }

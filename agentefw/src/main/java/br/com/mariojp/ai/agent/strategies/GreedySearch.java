@@ -14,37 +14,36 @@ public class GreedySearch extends Agent implements Comparator<INode> {
 
 	public GreedySearch(AgentModel agent) {
 		super(agent);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public INode function() throws EmptyBorderException {
 		this.border.add(this.firstNode);
-		INode no = null;
-		boolean concluido = false;
-		while (!concluido) {
+		INode node = null;
+		boolean completed = false;
+		while (!completed) {
 			if (this.border.isEmpty()) {
 				throw new EmptyBorderException();
 			} else {
-				no = (INode) this.border.remove(0);
-				if (this.isObjetivo(no)) {
-					concluido = true;
+				node = (INode) this.border.remove(0);
+				if (this.isGoal(node)) {
+					completed = true;
 				} else {
-					List<INode> list = this.actionCommand.executeActions(no);
+					List<INode> list = this.actionCommand.executeActions(node);
 					border.addAll(list);
 					Collections.sort(border.getList(),this);
-					}
 				}
 			}
+		}
 		this.end = new Date();
-        return no;
+        return node;
 	}
 
 	public int compare(INode node1, INode node2) {
 		int res = 0;
-		if (node1.getHeuristica() > node2.getHeuristica())
+		if (node1.getHeuristic() > node2.getHeuristic())
 			res = 1;
-		else if (node1.getHeuristica() < node2.getHeuristica())
+		else if (node1.getHeuristic() < node2.getHeuristic())
 			res = -1;
 		return res;
 	}

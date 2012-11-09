@@ -7,7 +7,7 @@ public class Border {
 
 	private int nodes = 0;
 	
-	private int visitas = 0;
+	private int visits = 0;
 	
 	private List<INode> border = new ArrayList<INode>();
 
@@ -21,14 +21,14 @@ public class Border {
 	}
 
 	public INode remove(int i) {
-		setVisitas(getVisitas() + 1);
+		setVisits(getVisits() + 1);
 		return this.border.remove(i);
 	}
 
 	public boolean containsState(INode node) {
 		boolean contain = false;
-		for(INode no : this.border){
-			if(no.getState().equals(node.getState())){
+		for(INode iNode : this.border){
+			if(iNode.getState().equals(node.getState())){
 				contain = true;
 			}
 		}
@@ -61,12 +61,12 @@ public class Border {
 		this.nodes = nodes;
 	}
 
-	public int getVisitas() {
-		return visitas;
+	public int getVisits() {
+		return visits;
 	}
 
-	public void setVisitas(int visitas) {
-		this.visitas = visitas;
+	public void setVisits(int visits) {
+		this.visits = visits;
 	}
 	
 

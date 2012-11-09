@@ -16,26 +16,24 @@ import java.util.List;
  */
 public interface IFunctions {
 	/**
-	 * função g(x) representa o calculo do custo do nó.
+	 * g(x) represents the node's cost
 	 * 
 	 * @param o
 	 * @return
 	 */
-	public abstract double g(INode no);
+	public abstract double g(INode node);
 
 	
-	public abstract double calculaUtilidade(INode no);
+	public abstract double calculateUtility(INode node);
 	/**
-	 * função h(x) representa o calculo da heuristica do nó.
+	 * h(x) represents heuristic's calculation of node.
 	 * 
 	 * @param o
 	 * @return
 	 */
-	public abstract double h(INode no);
+	public abstract double h(INode node);
 
-
-	public abstract boolean funcaoObjetivo(IState estado);
-	
+	public abstract boolean objectiveFunction(IState state);
 	
 	public abstract void setObjectives(List<IState> objectives);
 
