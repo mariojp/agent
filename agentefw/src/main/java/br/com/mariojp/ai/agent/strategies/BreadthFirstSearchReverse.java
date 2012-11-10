@@ -18,24 +18,24 @@ public class BreadthFirstSearchReverse extends Agent  {
 	@Override
 	public INode function() throws EmptyBorderException {
 		this.border.add(this.getGoalNode());
-		INode no = null;
-		boolean concluido = false;
-		while (!concluido) {
+		INode node = null;
+		boolean completed = false;
+		while (!completed) {
 			if (this.border.isEmpty()) {
 				throw new EmptyBorderException();
 			} else {
-				no = (INode) this.border.remove(0);
-				if (this.isStart(no)) {
-					concluido = true;
+				node = (INode) this.border.remove(0);
+				if (this.isStart(node)) {
+					completed = true;
 				} else {
-					List<INode> list = this.actionCommand.revertActions(no);
+					List<INode> list = this.actionCommand.revertActions(node);
 					border.addAll(list);
 				}
 			}
 
 		}
 		this.end = new Date();
-		return no;
+		return node;
 	}
 
 }

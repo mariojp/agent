@@ -25,7 +25,7 @@ public class DepthFirstSearchInteractive extends Agent {
 				throw new EmptyBorderException();
 			} else {
 				no = (INode) this.border.remove(0);
-				if (this.isObjetivo(no)) {
+				if (this.isGoal(no)) {
 					concluido = true;
 				} else {
 					List<INode> list = this.actionCommand.executeActions(no);

@@ -23,9 +23,9 @@ public final class Node implements INode {
 	private IState state;
 
 	/**
-	 * Node father
+	 * Parent Node
 	 */
-	private INode pai;
+	private INode parent;
 	
 	/**
 	 * action used to generate this node
@@ -50,7 +50,7 @@ public final class Node implements INode {
 	/**
 	 * 
 	 */
-	private double heuristica;
+	private double heuristic;
 
 
 	private INode next;
@@ -90,15 +90,15 @@ public final class Node implements INode {
 	/* (non-Javadoc)
 	 * @see br.edu.ability.agente.busca.generico.INo#getPai()
 	 */
-	public INode getPai() {
-		return pai;
+	public INode getParent() {
+		return parent;
 	}
 
 	/* (non-Javadoc)
 	 * @see br.edu.ability.agente.busca.generico.INo#setPai(br.edu.ability.agente.busca.interfaces.INo)
 	 */
-	public void setPai(INode pai) {
-		this.pai = pai;
+	public void setParent(INode parent) {
+		this.parent = parent;
 	}
 
 
@@ -150,20 +150,20 @@ public final class Node implements INode {
 	/* (non-Javadoc)
 	 * @see br.com.mariojp.ai.agent.search.INode#setUtilidade(double)
 	 */
-	public void setUtility(double utilidade) {
-		this.utility = utilidade;
+	public void setUtility(double utility) {
+		this.utility = utility;
 	}
 	/* (non-Javadoc)
 	 * @see br.com.mariojp.ai.agent.search.INode#getHeuristica()
 	 */
-	public double getHeuristica() {
-		return heuristica;
+	public double getHeuristic() {
+		return heuristic;
 	}
 	/* (non-Javadoc)
 	 * @see br.com.mariojp.ai.agent.search.INode#setHeuristica(double)
 	 */
-	public void setHeuristica(double heuristica) {
-		this.heuristica = heuristica;
+	public void setHeuristic(double heuristic) {
+		this.heuristic = heuristic;
 	}
 	public INode getNext() {
 		return this.next;

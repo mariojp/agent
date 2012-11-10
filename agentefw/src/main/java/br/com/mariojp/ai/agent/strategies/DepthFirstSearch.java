@@ -11,29 +11,29 @@ import br.com.mariojp.ai.agent.exception.EmptyBorderException;
 
 public class DepthFirstSearch extends Agent {
 
-	public DepthFirstSearch(AgentModel iagent) {
-		super(iagent);
+	public DepthFirstSearch(AgentModel iAgent) {
+		super(iAgent);
 	}
 
 	@Override
 	public INode function() throws EmptyBorderException {
 		this.border.add(this.firstNode);
-		INode no = null;
-		boolean concluido = false;
-		while (!concluido) {
+		INode node = null;
+		boolean completed = false;
+		while (!completed) {
 			if (this.border.isEmpty()) {
 				throw new EmptyBorderException();
 			} else {
-				no = (INode) this.border.remove(0);
-				if (this.isObjetivo(no)) {
-					concluido = true;
+				node = (INode) this.border.remove(0);
+				if (this.isGoal(node)) {
+					completed = true;
 				} else {
-					List<INode> list = this.actionCommand.executeActions(no);
+					List<INode> list = this.actionCommand.executeActions(node);
 					border.addAll(0, list);
 				}
 			}
 		}
 		this.end = new Date();
-		return no;
+		return node;
 	}
 }

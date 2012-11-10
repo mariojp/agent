@@ -10,7 +10,7 @@ import java.util.Map;
 import br.com.mariojp.ai.agent.action.ActionCommand;
 import br.com.mariojp.ai.agent.action.IAction;
 import br.com.mariojp.ai.agent.exception.EmptyBorderException;
-import br.com.mariojp.ai.agent.view.Grafico;
+import br.com.mariojp.ai.agent.view.Graphic;
 
 public abstract class Agent implements IAgent {
 
@@ -33,7 +33,7 @@ public abstract class Agent implements IAgent {
 
 	protected int type = IAgent.DEPTH_FIRST_SEARCH;
 	
-	protected Grafico grafico = Grafico.getInstancia();
+	protected Graphic graphic = Graphic.getInstancia();
 
 	public Agent(AgentModel agent) {
 		this.functions = agent.getFunctions();
@@ -42,7 +42,7 @@ public abstract class Agent implements IAgent {
 		this.objectives = agent.getObjectives();
 		this.functions.setObjectives(this.objectives);
 		this.setFirstNo(agent.getInitState());
-		this.grafico.adicionaNodePai(this.firstNode);
+		this.graphic.addParentNode(this.firstNode);
 		this.iteractiveDepth = agent.getIteractiveDepth();
 	}
 
@@ -51,12 +51,12 @@ public abstract class Agent implements IAgent {
 		this.firstNode.setAction("Init State");
 		this.firstNode.setState(state);
 		this.firstNode.setDepth(0);
-		this.firstNode.setPai(null);
+		this.firstNode.setParent(null);
 	}
 	
 	public INode getGoalNode(){
 		INode node = new Node();
-		node.setPai(null);
+		node.setParent(null);
 		node.setAction("Goal State");
 		node.setDepth(0);
 		node.setState(objectives.get(0));
@@ -90,12 +90,12 @@ public abstract class Agent implements IAgent {
 		this.objectives.add(objective);
 	}
 
-	protected boolean isObjetivo(INode no) {
-		boolean fim = functions.funcaoObjetivo(no.getState());
+	protected boolean isGoal(INode no) {
+		boolean end = functions.objectiveFunction(no.getState());
 		for (IState objective :  objectives)
 			if (no.getState().equals(objective))
-				fim = true;
-		return fim;
+				end = true;
+		return end;
 	}
 	
 	protected boolean isStart(INode node){
@@ -104,32 +104,32 @@ public abstract class Agent implements IAgent {
 	
 
 	/**
-	 * Funcao de Busca
+	 * Search function
 	 */
 	public abstract INode function() throws EmptyBorderException;
 
 	/**
-	 * Organiza a lista de a��es da solu��o.
+	 * Organizing the action list through the solution.
 	 */
-	public List<INode> obterCaminho(INode no) {
-		List<INode> caminho = new ArrayList<INode>();
-		while (no != null) {
-			caminho.add(0, no);
-			no = no.getPai();
+	public List<INode> getPath(INode node) {
+		List<INode> path = new ArrayList<INode>();
+		while (node != null) {
+			path.add(0, node);
+			node = node.getParent();
 		}
-		return caminho;
+		return path;
 
 	}
 
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
-		sb.append("Hora inicio: " + sdf.format(this.start) + "\n");
-		sb.append("Hora Fim   : " + sdf.format(this.end) + "\n");
-		sb.append("Tempo      : " + (this.end.getTime() - this.start.getTime())
-				+ "milisegundos \n");
-		sb.append("Total de Nós Expandidos : "+ this.border.getNodes() +"\n");
-		sb.append("Total de Nós Visitados : "+ this.border.getVisitas() +"\n");
+		sb.append("Begin       : " + sdf.format(this.start) + "\n");
+		sb.append("End         : " + sdf.format(this.end) + "\n");
+		sb.append("Time elapsed: " + (this.end.getTime() - this.start.getTime())
+				+ "milisecs \n");
+		sb.append("Total Nodes Expanded : "+ this.border.getNodes() +"\n");
+		sb.append("Total Nodes Visited : "+ this.border.getVisits() +"\n");
 		return sb.toString();
 	}
 
@@ -145,8 +145,8 @@ public abstract class Agent implements IAgent {
 		return firstNode;
 	}
 	
-	public void exibirGrafico(List<INode> list, String nome){
-		this.grafico.exibeArvore(list, nome);
+	public void showGraphic(List<INode> list, String name){
+		this.graphic.showTree(list, name);
 	}
 	
 	

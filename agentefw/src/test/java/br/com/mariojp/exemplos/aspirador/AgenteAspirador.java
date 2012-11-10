@@ -38,14 +38,14 @@ public class AgenteAspirador {
 				Estado.SALA_LIMPA,Estado.SALA_LIMPA); //(b)
 		Estado objetivo2 = new Estado(Estado.SALA_DIREITA,
 				Estado.SALA_LIMPA,Estado.SALA_LIMPA);
-		//Criando uma instancia da configuração do agente.
+		//Criando uma instancia da configuraï¿½ï¿½o do agente.
 		AgentModel model = new AgentModel();
 		//Atribuindo o estado inicial
 		model.setInitState(estadoInicial);
 		//Adicionando os objetivos
 		model.addObjective(objetivo1);
 		model.addObjective(objetivo2);
-		//Instanciando e adicionando as Ações
+		//Instanciando e adicionando as Aï¿½ï¿½es
 		model.addAction("Mover",new Mover());
 		model.addAction("Aspirar",new Aspirar());
 		//Definindo a estrategia
@@ -61,8 +61,8 @@ public class AgenteAspirador {
 			e.printStackTrace();
 		}
 		//nofinal;
-		List<INode> cam = agente.obterCaminho(nofinal);
-		agente.exibirGrafico(cam,"aspirador");
+		List<INode> cam = agente.getPath(nofinal);
+		agente.showGraphic(cam,"aspirador");
 		System.out.println(cam);
 		System.out.println(agente);
 		System.out.println(nofinal);

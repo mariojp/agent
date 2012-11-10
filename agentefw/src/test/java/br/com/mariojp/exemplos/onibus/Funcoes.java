@@ -19,7 +19,7 @@ public class Funcoes extends Functions {
 	public double g(INode arg0) {
 		INode ino = (INode) arg0;
 		Estado estado = (Estado) ino.getState();		
-		Estado pai = (Estado)ino.getPai().getState();
+		Estado pai = (Estado)ino.getParent().getState();
 		double valor = 0;				
 		valor = BaseDados.getInstancia().getDistanciaDireta(estado.getPonto(),pai.getPonto())*1.1;
 		if (!estado.getLinha().equals(pai.getLinha())){
@@ -35,8 +35,8 @@ public class Funcoes extends Functions {
 		INode ino = (INode) arg0;
 		Estado estado = (Estado) ino.getState();	
 		valor = valor + BaseDados.getInstancia().getDistanciaDireta(estado.getPonto(),objetivo.getPonto());
-		if (ino.getPai()!=null ){
-			Estado pai = (Estado) ino.getPai().getState();
+		if (ino.getParent()!=null ){
+			Estado pai = (Estado) ino.getParent().getState();
 			if (!estado.getLinha().equals(pai.getLinha())){
 				//valor = valor*1.5;
 			}

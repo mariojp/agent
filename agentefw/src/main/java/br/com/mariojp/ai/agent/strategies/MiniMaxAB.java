@@ -17,33 +17,33 @@ public class MiniMaxAB extends Agent{
    
     /**
      *
-     * MiniMax, retorna a utilidade máxima de um estado
+     * MiniMax, returns the maximum utility of a state
      *
-     * alpha: a melhor utilidade até o momento para MAX
-     * beta: a melhor utilidade até o momento para MIN
+     * alpha: the best utility of a state for MAX 
+     * beta: the best utility of a state for MAX 
      */
-    public double max(INode noCorrente, double alpha, double beta, int p) {
+    public double max(INode currentNode, double alpha, double beta, int p) {
         
-        if (this.getFunctions().funcaoObjetivo(noCorrente.getState())) {
-            return this.functions.calculaUtilidade(noCorrente);
+        if (this.getFunctions().objectiveFunction(currentNode.getState())) {
+            return this.functions.calculateUtility(currentNode);
         }
         
-        Iterator i = this.actionCommand.executeActions(noCorrente).iterator();
+        Iterator i = this.actionCommand.executeActions(currentNode).iterator();
         while (i.hasNext()) {
              
-            INode sucessor = (INode)i.next();
-            double vlSucessor = min( sucessor, alpha, beta, p+1);
+            INode successor = (INode)i.next();
+            double vlSuccessor = min( successor, alpha, beta, p+1);
             
-            if (vlSucessor > alpha) {
-                alpha = vlSucessor;
+            if (vlSuccessor > alpha) {
+                alpha = vlSuccessor;
                 
-                // poda alpha
+                // cuts alpha
                 if (alpha >= beta) {
                     return beta;
                 }
                 
-                noCorrente.setUtility( alpha );
-                noCorrente.setNext( sucessor );
+                currentNode.setUtility( alpha );
+                currentNode.setNext( successor );
             }
         }
         
@@ -52,29 +52,29 @@ public class MiniMaxAB extends Agent{
     
     /**
      *
-     * MiniMax, retorna a utilidade mínima de um estado
+     * MiniMax, returns the minimum utility of a state
      *
      */
-    public double min(INode noCorrente, double alpha, double beta, int p) {
+    public double min(INode currentNode, double alpha, double beta, int p) {
         
-        if (this.functions.funcaoObjetivo(noCorrente.getState())) {
-            return this.functions.calculaUtilidade(noCorrente);
+        if (this.functions.objectiveFunction(currentNode.getState())) {
+            return this.functions.calculateUtility(currentNode);
         }
         
-        Iterator i = this.actionCommand.executeActions(noCorrente).iterator();
+        Iterator i = this.actionCommand.executeActions(currentNode).iterator();
         while (i.hasNext()) {
-            INode sucessor = (INode)i.next();
-            double vlSucessor = max( sucessor, alpha, beta, p+1);
+            INode successor = (INode)i.next();
+            double vlSuccessor = max( successor, alpha, beta, p+1);
             
-            if (vlSucessor < beta) {
-                beta = vlSucessor;
+            if (vlSuccessor < beta) {
+                beta = vlSuccessor;
                 
                 if (beta <= alpha) {
                     return alpha;
                 }
                 
-                noCorrente.setUtility( beta );
-                noCorrente.setNext( sucessor );
+                currentNode.setUtility( beta );
+                currentNode.setNext( successor );
                 
             }
         }

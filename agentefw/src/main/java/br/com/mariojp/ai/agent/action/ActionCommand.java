@@ -11,18 +11,18 @@ import br.com.mariojp.ai.agent.INode;
 import br.com.mariojp.ai.agent.IState;
 import br.com.mariojp.ai.agent.Node;
 import br.com.mariojp.ai.agent.exception.ImpossibleActionException;
-import br.com.mariojp.ai.agent.view.Grafico;
+import br.com.mariojp.ai.agent.view.Graphic;
 
 /**
  * 
  * @project AgenteFW
  * @package br.com.mariojp.ia.agente.busca.acoes
- * @file ActiooesCommand.java
+ * @file ActionCommand.java
  * @author Mario Jorge Pereira
  * @version 1.1
  * 
  *          <p>
- *          Classe que gerencia as A��es do Agente
+ *          Class that manages the actions of Agent
  *          </p>
  */
 public class ActionCommand {
@@ -33,10 +33,7 @@ public class ActionCommand {
 	public ActionCommand(IFunctions order) {
 		this.functions = order;
 	}
-
-	/**
-	 * Map das que guarda a instacia das a��es.
-	 */
+	
 	private Map<String, IAction> actions = new HashMap<String, IAction>();
 
 	private ArrayList<IState> statsOpen = new ArrayList<IState>();
@@ -46,36 +43,35 @@ public class ActionCommand {
 	private boolean stateRepeat = false;
 
 	/**
-	 * Metodo que aplica as a��es e retorna uma Lista de Nos resultantes das
-	 * a��es.
+	 * Apply actions
 	 * 
-	 * @param no
-	 *            - No que as a��es devem ser aplicadas
-	 * @return List - Lista de Nos
+	 * @param node
+	 *            - Node that actions should be implemented
+	 * @return List - List of resulting nodes
 	 */
-	public List<INode> executeActions(INode no) {
+	public List<INode> executeActions(INode node) {
 		ArrayList<INode> links = new ArrayList<INode>();
-		statsOpen.add(no.getState());
-		for (String nome : actions.keySet()) {
-			IAction acao = actions.get(nome);
-			List<IState> estadosnovos = new ArrayList<IState>();
+		statsOpen.add(node.getState());
+		for (String name : actions.keySet()) {
+			IAction action = actions.get(name);
+			List<IState> newStates = new ArrayList<IState>();
 			try {
-				estadosnovos.addAll(acao.execute(no.getState()));
-				Iterator<IState> ite = estadosnovos.iterator();
+				newStates.addAll(action.execute(node.getState()));
+				Iterator<IState> ite = newStates.iterator();
 				while (ite.hasNext()) {
-					IState estadoNovo = ite.next();
+					IState newState = ite.next();
 					// o nó não pode repetir no par
-					if (!(!stateRepeat && no.getPai() != null && no.getPai()
-							.getState().equals(estadoNovo))) {
-						if (!statsOpen.contains(estadoNovo)) {
-							INode novo = new Node();
-							novo.setDepth(no.getDepth() + 1);
-							novo.setState(estadoNovo);
-							novo.setAction(nome);
-							novo.setPai(no);
-							novo.setCost(no.getCost() + (functions.g(novo)));
-							novo.setHeuristica(functions.h(no));
-							links.add(novo);
+					if (!(!stateRepeat && node.getParent() != null && node.getParent()
+							.getState().equals(newState))) {
+						if (!statsOpen.contains(newState)) {
+							INode iNode = new Node();
+							iNode.setDepth(node.getDepth() + 1);
+							iNode.setState(newState);
+							iNode.setAction(name);
+							iNode.setParent(node);
+							iNode.setCost(node.getCost() + (functions.g(iNode)));
+							iNode.setHeuristic(functions.h(node));
+							links.add(iNode);
 						}
 					}
 				}
@@ -84,41 +80,40 @@ public class ActionCommand {
 			}
 
 		}
-		Grafico.getInstancia().addListFilhos(links, no.getDepth() + 1);
+		Graphic.getInstancia().addChildrenList(links, node.getDepth() + 1);
 		return links;
 
 	}
 
 	/**
-	 * Metodo que aplica as a��es e retorna uma Lista de Nos resultantes das
-	 * a��es.
+	 * Revert actions
 	 * 
-	 * @param no
-	 *            - No que as a��es devem ser aplicadas
-	 * @return List - Lista de Nos
+	 * @param node
+	 *            - Node that actions should be implemented
+	 * @return List - List of resulting nodes
 	 */
-	public List<INode> revertActions(INode no) {
+	public List<INode> revertActions(INode node) {
 		ArrayList<INode> links = new ArrayList<INode>();
 		Iterator it = actions.keySet().iterator();
 		while (it.hasNext()) {
-			String nome = (String) it.next();
-			IAction acao = actions.get(nome);
-			List<IState> estadosnovos = new ArrayList<IState>();
+			String name = (String) it.next();
+			IAction action = actions.get(name);
+			List<IState> newStates = new ArrayList<IState>();
 			try {
-				estadosnovos.addAll(acao.revert(no.getState()));
-				Iterator<IState> ite = estadosnovos.iterator();
+				newStates.addAll(action.revert(node.getState()));
+				Iterator<IState> ite = newStates.iterator();
 				while (ite.hasNext()) {
-					IState estadoNovo = ite.next();
-					if (!(!stateRepeat && no.getPai() != null && no.getPai()
-							.getState().equals(estadoNovo))) {
-						INode novo = new Node();
-						novo.setDepth(no.getDepth() + 1);
-						novo.setState(estadoNovo);
-						novo.setAction(nome);
-						novo.setPai(no);
-						novo.setCost(no.getCost() + (functions.g(novo)));
-						novo.setHeuristica(functions.h(no));
-						links.add(novo);
+					IState newState = ite.next();
+					if (!(!stateRepeat && node.getParent() != null && node.getParent()
+							.getState().equals(newState))) {
+						INode iNode = new Node();
+						iNode.setDepth(node.getDepth() + 1);
+						iNode.setState(newState);
+						iNode.setAction(name);
+						iNode.setParent(node);
+						iNode.setCost(node.getCost() + (functions.g(iNode)));
+						iNode.setHeuristic(functions.h(node));
+						links.add(iNode);
 					}
 				}
 			} catch (ImpossibleActionException e) {
@@ -129,20 +124,12 @@ public class ActionCommand {
 
 	}
 
-	/**
-	 * Adiciona a��es a lista de a��es.
-	 * 
-	 * @param nome
-	 *            - Nome que identifica a a��o.
-	 * @param acao
-	 *            - instancia de uma a��o.
-	 */
 	public void addAction(String name, IAction action) {
 		this.actions.put(name, action);
 	}
 
-	public void setStateRepeat(boolean repetir) {
-		this.stateRepeat = repetir;
+	public void setStateRepeat(boolean repeat) {
+		this.stateRepeat = repeat;
 	}
 
 }

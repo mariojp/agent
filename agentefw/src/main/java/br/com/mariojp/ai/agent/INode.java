@@ -25,12 +25,12 @@ public interface INode {
 	/* (non-Javadoc)
 	 * @see br.edu.ability.agente.busca.generico.INo#getPai()
 	 */
-	public abstract INode getPai();
+	public abstract INode getParent();
 
 	/* (non-Javadoc)
 	 * @see br.edu.ability.agente.busca.generico.INo#setPai(br.edu.ability.agente.busca.interfaces.INo)
 	 */
-	public abstract void setPai(INode pai);
+	public abstract void setParent(INode parent);
 
 	public abstract String toString();
 
@@ -44,15 +44,14 @@ public interface INode {
 
 	public abstract double getUtility();
 
-	public abstract void setUtility(double utilidade);
+	public abstract void setUtility(double utility);
 
-	public abstract double getHeuristica();
+	public abstract double getHeuristic();
 
-	public abstract void setHeuristica(double heuristica);
+	public abstract void setHeuristic(double heuristic);
 
 	public abstract INode getNext();
 	
 	public abstract void setNext(INode node);
-	
 
 }
