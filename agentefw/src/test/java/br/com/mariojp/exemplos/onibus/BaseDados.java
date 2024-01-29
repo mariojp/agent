@@ -72,10 +72,8 @@ public class BaseDados {
 //			name = r.json("http://maps.googleapis.com/maps/api/directions/json?origin="+e1.getLatitudeGraus()+","+e1.getLongitudeGraus()+"&destination="+e2.getLatitudeGraus()+","+e2.getLongitudeGraus()+"&sensor=false").get("routes[0].legs[0].distance.text").toString();
 //			System.out.println(name);
 //		} catch (IOException e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		} catch (Exception e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 //		double retorno = 0.0;
