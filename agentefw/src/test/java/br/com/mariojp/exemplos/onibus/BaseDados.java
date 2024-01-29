@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import us.monoid.web.Resty;
+//import us.monoid.web.Resty;
 
 import br.com.mariojp.exemplos.metroparis.excecoes.DistanciaNaoInformadaException;
 
@@ -50,39 +50,42 @@ public class BaseDados {
 	}
 		
 	public double getDistanciaReal(BusStop e1,BusStop e2) throws DistanciaNaoInformadaException{
-		/*
-		for (int i =0;i<distReaisEstacoes.size(); i++) {
+		/*for (int i =0;i<distReaisEstacoes.size(); i++) {
 			Distancia distancia = (Distancia) distReaisEstacoes.get(i);
 			if (distancia.getOrigem().equals(e1) &&
-					distancia.getDestino().equals(e2))	
+					distancia.getDestino().equals(e2))
 				return distancia.getDistancia();
 			if (distancia.getOrigem().equals(e2) &&
-					distancia.getDestino().equals(e1))	
-				return distancia.getDistancia();							
+					distancia.getDestino().equals(e1))
+				return distancia.getDistancia();
 		}
+
 		throw new DistanciaNaoInformadaException("Distancia Real nao informada para "+e1+"-"+e2); */
-		Resty r = new Resty();
-		String name = "";
-		try 
-		{ 
-		Thread.sleep (1000); 
-		} catch (InterruptedException e) {}; 
-		try {
-			name = r.json("http://maps.googleapis.com/maps/api/directions/json?origin="+e1.getLatitudeGraus()+","+e1.getLongitudeGraus()+"&destination="+e2.getLatitudeGraus()+","+e2.getLongitudeGraus()+"&sensor=false").get("routes[0].legs[0].distance.text").toString();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		double retorno = 0.0;
-		if (name.indexOf("km")!=-1){
-			retorno =  Double.parseDouble(name.replaceAll("km", ""));
-		}else if (name.indexOf("m")!=-1){
-			retorno =  Double.parseDouble(name.replaceAll("m", ""))/1000;
-		}
-		return retorno;
+//		Resty r = new Resty();
+//		String name = "";
+//		try
+//		{
+//		Thread.sleep (1000);
+//		} catch (InterruptedException e) {};
+//		try {
+//			System.out.println(("http://maps.googleapis.com/maps/api/directions/json?origin="+e1.getLatitudeGraus()+","+e1.getLongitudeGraus()+"&destination="+e2.getLatitudeGraus()+","+e2.getLongitudeGraus()+"&sensor=false"));
+//			name = r.json("http://maps.googleapis.com/maps/api/directions/json?origin="+e1.getLatitudeGraus()+","+e1.getLongitudeGraus()+"&destination="+e2.getLatitudeGraus()+","+e2.getLongitudeGraus()+"&sensor=false").get("routes[0].legs[0].distance.text").toString();
+//			System.out.println(name);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		double retorno = 0.0;
+//		if (name.indexOf("km")!=-1){
+//			retorno =  Double.parseDouble(name.replaceAll("km", ""));
+//		}else if (name.indexOf("m")!=-1){
+//			retorno =  Double.parseDouble(name.replaceAll("m", ""))/1000;
+//		}
+//		return retorno;
+		return 0.0;
 	}
 	
 	public double getDistanciaDireta(BusStop e1,BusStop e2) {
@@ -97,7 +100,7 @@ public class BaseDados {
 
 	public void carregaRotas() throws IOException {
 		//"id","code","label"
-		BufferedReader in = new BufferedReader(new FileReader("routes.csv"));  
+		BufferedReader in = new BufferedReader(new FileReader("src/test/resources/routes.csv"));
 		String linha = in.readLine();  
 		while ((linha = in.readLine()) != null) {
 		    String conteudo[] = linha.split(",");  
@@ -112,7 +115,7 @@ public class BaseDados {
 	
 	public void carregaTrechos() throws IOException {
 		//"route-id","seq","stop-id"
-		BufferedReader in = new BufferedReader(new FileReader("routestops.csv"));  
+		BufferedReader in = new BufferedReader(new FileReader("src/test/resources/routestops.csv"));
 		String linha = in.readLine();  
 		int i = 0;
 		RouteStop routeStop = null;
@@ -143,7 +146,7 @@ public class BaseDados {
 
 	public void carregaPontos() throws IOException {
 		//"Location","Description","Bay","Latitude","Longitude","",
-		BufferedReader in = new BufferedReader(new FileReader("bus-stops.csv"));  
+		BufferedReader in = new BufferedReader(new FileReader("src/test/resources/bus-stops.csv"));
 		String linha = in.readLine();  
 		while ((linha = in.readLine()) != null) {
 		    String conteudo[] = linha.split(",");  

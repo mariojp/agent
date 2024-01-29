@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 import br.com.mariojp.ai.agent.INode;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
-import com.thoughtworks.xstream.XStream;
+//import com.thoughtworks.xstream.XStream;
 
 
 public class Graphic {
@@ -85,19 +88,46 @@ public class Graphic {
 
 	public void exportXML(List<TreeNode> list, String nome){
 		
-		XStream xstream = new XStream();
-		xstream.alias("TreeNode", TreeNode.class);
-		try {
-			System.out.println(list.size());
-			xstream.toXML(list,new FileOutputStream(nome+".xml"));
-		
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//		XStream xstream = new XStream();
+//		xstream.alias("TreeNode", TreeNode.class);
+//		try {
+//			System.out.println(list.size());
+//			xstream.toXML(list,new FileOutputStream(nome+".xml"));
+//
+//		} catch (FileNotFoundException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 
 		//System.out.println(xml);
-		
+
+		try {
+			JAXBContext context = JAXBContext.newInstance(TreeNodeListWrapper.class);
+			Marshaller marshaller = context.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+			TreeNodeListWrapper wrapper = new TreeNodeListWrapper();
+			wrapper.setList(list);
+
+			marshaller.marshal(wrapper, new FileOutputStream(nome + ".xml"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace(); // Captura outras exceções, incluindo as relacionadas ao JAXB
+		}
 	}
 
+	@XmlRootElement(name = "SolutionTree")
+	static class TreeNodeListWrapper {
+
+		private List<TreeNode> list;
+
+		public List<TreeNode> getList() {
+			return list;
+		}
+
+		public void setList(List<TreeNode> list) {
+			this.list = list;
+		}
+	}
 }

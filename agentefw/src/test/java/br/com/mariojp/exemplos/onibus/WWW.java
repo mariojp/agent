@@ -32,7 +32,7 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
-import us.monoid.web.Resty;
+//import us.monoid.web.Resty;
 
 /**
  * Helper to get World Wide Web data like site content, files, headers...
@@ -112,8 +112,6 @@ final public class WWW {
 			}
 			bufferedReader.close();
 			return result.toString();
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -149,10 +147,10 @@ final public class WWW {
 		parameters.put("sensor", "false");*/
 		//System.out.println(WWW.getContent("http://maps.googleapis.com/maps/api/directions/json", parameters));
 
-		Resty r = new Resty();
-		String name = r.json("http://maps.googleapis.com/maps/api/directions/json?origin=50.5875,-1.2312&destination=50.5899,-1.2297&sensor=false").get("routes[0].legs[0].distance.text").toString();
-		System.out.println(name);
-		System.out.println(Double.parseDouble(name.replaceAll("km", "")));
+//		Resty r = new Resty();
+//		String name = r.json("http://maps.googleapis.com/maps/api/directions/json?origin=50.5875,-1.2312&destination=50.5899,-1.2297&sensor=false").get("routes[0].legs[0].distance.text").toString();
+//		System.out.println(name);
+//		System.out.println(Double.parseDouble(name.replaceAll("km", "")));
 		
 	}
 

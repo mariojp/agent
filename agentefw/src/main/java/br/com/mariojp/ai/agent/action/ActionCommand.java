@@ -14,29 +14,22 @@ import br.com.mariojp.ai.agent.exception.ImpossibleActionException;
 import br.com.mariojp.ai.agent.view.Graphic;
 
 /**
- * 
- * @project AgenteFW
- * @package br.com.mariojp.ia.agente.busca.acoes
- * @file ActionCommand.java
+ * Classe {@code ActionCommand} que gerencia as ações do Agente no projeto AgenteFW.
+ * Esta classe é responsável por definir e executar comandos específicos dentro do contexto de busca e inteligência artificial.
+ *
  * @author Mario Jorge Pereira
  * @version 1.1
- * 
- *          <p>
- *          Class that manages the actions of Agent
- *          </p>
+ * @since 1.0
  */
 public class ActionCommand {
 
-	/**
-	 * 
-	 */
 	public ActionCommand(IFunctions order) {
 		this.functions = order;
 	}
 	
-	private Map<String, IAction> actions = new HashMap<String, IAction>();
+	private final Map<String, IAction> actions = new HashMap<String, IAction>();
 
-	private ArrayList<IState> statsOpen = new ArrayList<IState>();
+	private final ArrayList<IState> statsOpen = new ArrayList<IState>();
 
 	private IFunctions functions = null;
 
@@ -77,6 +70,7 @@ public class ActionCommand {
 				}
 			} catch (ImpossibleActionException e) {
 				//e.printStackTrace();
+				//throw new RuntimeException(e);
 			}
 
 		}
@@ -117,6 +111,7 @@ public class ActionCommand {
 					}
 				}
 			} catch (ImpossibleActionException e) {
+				throw new RuntimeException(e.getMessage());
 			}
 
 		}

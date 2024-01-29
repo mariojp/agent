@@ -1,5 +1,7 @@
 package br.com.mariojp.ai.agent.view;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 public class TreeNode {
 	
 	private int number;
